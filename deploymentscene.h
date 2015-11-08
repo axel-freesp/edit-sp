@@ -7,7 +7,6 @@
 #include <list>
 using namespace std;
 
-class QDomElement;
 class GraphHintsRep;
 class ProcessViewItem;
 

@@ -1,18 +1,26 @@
 #include "signalgraph_helper.h"
 #include <QString>
 
+static inline bool nodeIsGraphHint(const QDomElement &g){
+    return g.nodeName() == QString("graph-hint");
+}
 
-QPoint SignalgraphHelper::GetGraphToplevelPosition(const QDomElement &graph){
-    QPoint pos(0.0, 0.0);
+static QDomElement getFirstToplevelGraphHint(const QDomElement &graph){
     QDomElement g;
     for (g=graph.firstChildElement(); !g.isNull(); g=g.nextSiblingElement()){
-        if (g.nodeName() == QString("graph-hint")) {
+        if (nodeIsGraphHint(g)) {
             const QString a = g.attribute("mode");
             if (a.isNull() || (a == QString("toplevel"))){
                 break;
             }
         }
     }
+    return g;
+}
+
+QPoint SignalgraphHelper::GetGraphToplevelPosition(const QDomElement &graph){
+    QPoint pos(0.0, 0.0);
+    QDomElement g = getFirstToplevelGraphHint(graph);
     if (!g.isNull()){
         pos.setX(g.attribute("x").toInt());
         pos.setY(g.attribute("y").toInt());
@@ -21,15 +29,7 @@ QPoint SignalgraphHelper::GetGraphToplevelPosition(const QDomElement &graph){
 }
 
 void    SignalgraphHelper::SetGraphToplevelPosition(QDomElement &graph, const QPoint &new_position){
-    QDomElement g;
-    for (g=graph.firstChildElement(); !g.isNull(); g=g.nextSiblingElement()){
-        if (g.nodeName() == QString("graph-hint")){
-            const QString a = g.attribute("mode");
-            if (a.isNull() || (a == QString("toplevel"))){
-                break;
-            }
-        }
-    }
+    QDomElement g = getFirstToplevelGraphHint(graph);
     if (!g.isNull()) {
         g.setAttribute("x", QString("%1").arg((int)new_position.x()).toStdString().c_str());
         g.setAttribute("y", QString("%1").arg((int)new_position.y()).toStdString().c_str());
@@ -40,15 +40,7 @@ void    SignalgraphHelper::SetGraphToplevelPosition(QDomElement &graph, const QP
 
 QPoint SignalgraphHelper::GetNodeToplevelPosition(const QDomElement &node){
     QPoint pos(0, 0);
-    QDomElement g;
-    for (g=node.firstChildElement(); !g.isNull(); g=g.nextSiblingElement()){
-        if (g.nodeName() == QString("graph-hint")) {
-            const QString a = g.attribute("mode");
-            if (a.isNull() || (a == QString("toplevel"))){
-                break;
-            }
-        }
-    }
+    QDomElement g = getFirstToplevelGraphHint(node);
     if (!g.isNull()){
         pos.setX(g.attribute("x").toInt());
         pos.setY(g.attribute("y").toInt());
@@ -57,15 +49,7 @@ QPoint SignalgraphHelper::GetNodeToplevelPosition(const QDomElement &node){
 }
 
 void    SignalgraphHelper::SetNodeToplevelPosition(QDomElement &node, const QPoint &new_position){
-    QDomElement g;
-    for (g=node.firstChildElement(); !g.isNull(); g=g.nextSiblingElement()){
-        if (g.nodeName() == QString("graph-hint")){
-            const QString a = g.attribute("mode");
-            if (a.isNull() || (a == QString("toplevel"))){
-                break;
-            }
-        }
-    }
+    QDomElement g = getFirstToplevelGraphHint(node);
     if (!g.isNull()) {
         g.setAttribute("x", QString("%1").arg((int)new_position.x()).toStdString().c_str());
         g.setAttribute("y", QString("%1").arg((int)new_position.y()).toStdString().c_str());

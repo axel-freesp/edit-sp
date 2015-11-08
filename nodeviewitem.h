@@ -31,6 +31,7 @@ public:
 
 class NodeViewItem: public QObject, public QGraphicsItem, public SignalgraphHelper {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
 public:
     NodeViewItem(QDomElement node, QGraphicsItem *parent = 0);
     virtual QRectF boundingRect() const;

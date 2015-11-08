@@ -7,7 +7,7 @@ XmlFileRep::XmlFileRep(const QString &filename){
     QFile   file(filename);
     QString error;
     int     errline;
-    bool succ = domDocument.setContent(&file, &error, &errline);
+    bool succ = domDocument.setContent((QIODevice*)&file, &error, &errline);
     if (!succ){
         cout << "SignalgraphRep error in file " << filename.toStdString().c_str()
              << " line " << errline << ": " << error.toStdString().c_str() << endl;

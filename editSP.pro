@@ -1,4 +1,4 @@
-QT += widgets
+QT += widgets xmlpatterns
 TEMPLATE = app
 FORMS = frontend.ui
 SOURCES = main.cpp \
@@ -27,4 +27,4 @@ HEADERS = mainwindow.h \
     processviewitem.h \
     deploymentscene.h
 INCLUDEPATH =
-LIBS = -lQtXml
+LIBS = -lQt5Xml

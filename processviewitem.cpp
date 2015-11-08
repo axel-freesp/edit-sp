@@ -22,7 +22,7 @@ void ResizeViewItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
 
 void ResizeViewItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     QGraphicsItem::mouseReleaseEvent(event);
-    emit mouseRelease(this);
+    emit mouseRelease();
 }
 
 void ResizeViewItem::paint(QPainter *painter, const QStyleOptionGraphicsItem */*option*/, QWidget */*widget*/){
@@ -173,7 +173,7 @@ void ProcessViewItem::sizeChanged(ResizeViewItem *item){
     emit positionChanged(this);
 }
 
-void ProcessViewItem::mouseRelease(ResizeViewItem *item){
+void ProcessViewItem::mouseRelease(){
     emit newPosition(this);
 }
 

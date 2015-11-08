@@ -24,7 +24,7 @@ protected:
     const QPoint box;
 signals:
     void positionChanged(ResizeViewItem *item);
-    void mouseRelease(ResizeViewItem *item);
+    void mouseRelease();
 };
 
 class ProcessViewItem: public QObject, public QGraphicsItem, public SignalgraphHelper {
@@ -47,7 +47,7 @@ signals:
     void newPosition(const ProcessViewItem *self);      // connect to parent->resize
 private slots:
     void sizeChanged(ResizeViewItem *item);
-    void mouseRelease(ResizeViewItem *item);
+    void mouseRelease();
     void positionChanged(const NodeViewItem *item);
 public:
     QDomElement graph;

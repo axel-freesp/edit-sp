@@ -6,7 +6,7 @@
 
 class SignalgraphHelper {
 protected:
-    static QPoint GetGraphToplevelPosition(const QDomElement &node);
+    static QPoint GetGraphToplevelPosition(const QDomElement &graph);
     static void   SetGraphToplevelPosition(QDomElement &graph, const QPoint &new_position);
     static QPoint GetNodeToplevelPosition(const QDomElement &node);
     static void   SetNodeToplevelPosition(QDomElement &node, const QPoint &new_position);
